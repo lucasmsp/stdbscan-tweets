@@ -1,3 +1,6 @@
+# coding=UTF-8
+#!/usr/bin/python
+
 import math
 from datetime import timedelta
 from geopy.distance import great_circle
@@ -32,19 +35,17 @@ def ST_DBSCAN(df, spatial_threshold, temporal_threshold, min_neighbors):
             if len(neighborhood) < min_neighbors:
                 df.set_value(index, 'cluster', NOISE)
                 logging-=1
-                print logging
+                print "1ºa --> {}".format(logging)#ok
 
             else: # found a core point
                 cluster_label = cluster_label + 1
                 df.set_value(index, 'cluster', cluster_label)# assign a label to core point
                 logging-=1
-                print logging
+                print "1ºb --> {}".format(logging)#ok
 
                 for neig_index in neighborhood: # assign core's label to its neighborhood
                     df.set_value(neig_index, 'cluster', cluster_label)
                     stack.append(neig_index) # append neighborhood to stack
-                    logging-=1
-                    print logging
 
                 while len(stack) > 0: # find new neighbors from core point neighborhood
                     current_point_index = stack.pop()
@@ -53,11 +54,11 @@ def ST_DBSCAN(df, spatial_threshold, temporal_threshold, min_neighbors):
                     if len(new_neighborhood) >= min_neighbors: # current_point is a new core
                         for neig_index in new_neighborhood:
                             neig_cluster = df.loc[neig_index]['cluster']
-                            if (neig_cluster != NOISE) & (neig_cluster == UNMARKED):
+                            if (neig_cluster != NOISE) & (neig_cluster == UNMARKED):  # ?
                                 # TODO: verify cluster average before add new point
                                 df.set_value(neig_index, 'cluster', cluster_label)
                                 logging-=1
-                                print logging
+                                print "2º --> {}".format(logging)
                                 stack.append(neig_index)
 
 

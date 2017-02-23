@@ -49,8 +49,8 @@ def main():
 if __name__ == "__main__":
     sys.stdout = open('log.txt', 'w', 0)
 
-    start_time = time.time()
+    start = time.time()
     main()
-    end_time   = time.time()
+    end = time.time()
 
-    print "Time elapsed: %.2 secs" % ( end - start)
+    print "Time elapsed: %.2f secs" % ( end - start)
