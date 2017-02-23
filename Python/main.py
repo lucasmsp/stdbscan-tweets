@@ -43,7 +43,7 @@ def main():
     print "Result - %d:" % len(result_df)
 
     output = "result_marco_d{0}_t{1}_n{2}.csv".format(spatial_threshold,temporal_threshold,min_neighbors)
-    result_df.to_csv(output,sep='\t')
+    result_df.to_csv(output,sep='\t',index=False)
 
 
 if __name__ == "__main__":
